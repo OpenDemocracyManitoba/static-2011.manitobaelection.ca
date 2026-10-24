@@ -34,6 +34,22 @@ Snippet shapes removed (IDs and whitespace normalised):
   <script async src="https://www.googletagmanager.com/gtag/js?id=<ID>"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '<ID>'); </script>
   ```
 
+## ActiveAdmin assets removed
+
+Owner decision (Phase B, 2026-10-24): the archive doesn't host the Rails admin. The site never had admin pages in `site/`, but the compiled ActiveAdmin assets were there. `python3 -I drop_admin_assets.py --apply` removed these 9 files, which no public page references:
+
+* `images/active_admin/admin_notes_icon.png`
+* `images/active_admin/loading.gif`
+* `images/active_admin/nested_menu_arrow.gif`
+* `images/active_admin/nested_menu_arrow_dark.gif`
+* `images/active_admin/orderable.png`
+* `javascripts/active_admin.js`
+* `javascripts/active_admin_vendor.js`
+* `stylesheets/active_admin.css`
+* `stylesheets/admin/active_admin.css`
+
+**Not admin, left as is:** `pages/13/historical-election-maps.html` loads `/stylesheets/ui-lightness/jquery-ui-1.8.16.custom.css` and `/javascripts/jquery-ui-1.8.16.custom.min.js` for its slider. Neither file was on the server, so they 404ed on the live site too.
+
 ## Hosting
 
 Served from **Cloudflare Workers static assets** (Phase B of the olddroplet migration). `wrangler.jsonc`, `.gitignore`, `site/404.html` and this section are written by `hosting.py` (`python3 -I hosting.py 2011.manitobaelection.ca <preview|routed|final>`).
