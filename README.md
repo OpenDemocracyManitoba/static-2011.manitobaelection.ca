@@ -56,7 +56,7 @@ Served from **Cloudflare Workers static assets** (Phase B of the olddroplet migr
 
 * **Worker:** `static-2011-manitobaelection-ca`, account `Stungeye@gmail.com's Account`.
 * **Deploy:** `npx wrangler@4.148.0 deploy` from the repo root. Only `site/` is uploaded.
-* **Routes:** none yet (preview only).
+* **Routes:** `2011.manitobaelection.ca/*` on zone `manitobaelection.ca`, over the existing proxied DNS record.
 * **workers.dev:** https://static-2011-manitobaelection-ca.stungeye.workers.dev. Per-version preview URLs are off (`preview_urls: false`).
 * **Serving:** `html_handling: auto-trailing-slash` (`/foo` serves `foo.html`, `/foo/` serves `foo/index.html`; the other forms 307 to those) and `not_found_handling: 404-page` (`site/404.html`, a minimal page added in Phase B).
 * **http → https:** the zone setting "Always Use HTTPS" (301 at Cloudflare's edge).
