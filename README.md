@@ -50,6 +50,17 @@ Owner decision (Phase B, 2026-10-24): the archive doesn't host the Rails admin. 
 
 **Not admin, left as is:** `pages/13/historical-election-maps.html` loads `/stylesheets/ui-lightness/jquery-ui-1.8.16.custom.css` and `/javascripts/jquery-ui-1.8.16.custom.min.js` for its slider. Neither file was on the server, so they 404ed on the live site too.
 
+## Unrelated files removed
+
+Owner decision (Phase B, 2026-10-25): files that aren't part of the site were removed by `python3 -I drop_unrelated.py 2011.manitobaelection.ca --apply` (23 files). No remaining file references them.
+
+* `uploads/politician_image/1/` (4 files): test upload (the Windows `Koala.jpg` sample photo), not a candidate
+* `images/test/` (15 files): unreferenced test copies of the historic maps
+* `images/rails.png` (1 file): Rails default `public/` file
+* `javascripts/prototype.js` (1 file): Rails default `public/` file, never loaded
+* `javascripts/ajax_buttons.js` (1 file): unreferenced script
+* `stylesheets/sass/application.sass` (1 file): stylesheet source, not served by the app
+
 ## Hosting
 
 Served from **Cloudflare Workers static assets** (Phase B of the olddroplet migration). `wrangler.jsonc`, `.gitignore`, `site/404.html` and this section are written by `hosting.py` (`python3 -I hosting.py 2011.manitobaelection.ca <preview|routed|final>`).
